@@ -1,0 +1,3 @@
+<template>
+    PRETTY BLOCK
+</template>

@@ -1,0 +1,3 @@
+<template>
+    UGLY BLOCK
+</template>
