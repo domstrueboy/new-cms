@@ -1,3 +1,5 @@
 <template>
-    UGLY BLOCK
+    <section>
+        UGLY BLOCK
+    </section>
 </template>

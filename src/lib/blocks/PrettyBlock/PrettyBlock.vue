@@ -1,3 +1,9 @@
 <template>
-    PRETTY BLOCK
+    <section>
+        PRETTY BLOCK
+    </section>
 </template>
+
+<script lang="ts">
+
+</script>

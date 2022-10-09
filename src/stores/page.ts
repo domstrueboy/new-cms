@@ -4,13 +4,13 @@ import BLOCK_NAMES from '@/lib/blocks/BLOCK_NAMES'
 
 const defaultPage = [
   {
-    id: BLOCK_NAMES.PrettyBlock,
+    name: BLOCK_NAMES.PrettyBlock,
     props: {
 
     }
   },
   {
-    id: BLOCK_NAMES.UglyBlock,
+    name: BLOCK_NAMES.UglyBlock,
     props: {
       
     }

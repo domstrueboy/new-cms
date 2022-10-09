@@ -1,17 +1,31 @@
 <template>
    <main>
-        PREVIEW
-
-        {{ JSON.stringify(page) }}
+      <component
+        v-for="block in page"
+        :key="block.name"
+        :is="block.name"
+      />
    </main> 
 </template>
 
-<script>
+<script lang="ts">
+import { defineAsyncComponent, type AsyncComponentLoader } from 'vue'
 import { usePageStore } from '@/stores/page'
 
+// Dynamic import all the blocks from lib
+const folders = import.meta.glob('../lib/blocks/*/*.vue')
+const components = Object.entries(folders)
+  .reduce((blocks: object, [blockName, blockImport]: [string, AsyncComponentLoader]) => ({
+    ...blocks,
+    [blockName.split('/')[3]]: defineAsyncComponent(blockImport)
+  }), {})
+
 export default {
+  components,
+
   setup() {
-    const page = usePageStore()
+    const { page } = usePageStore()
+    return { page }
   },
 }
 </script>
@@ -19,5 +33,7 @@ export default {
 <style scoped>
     main {
         background-color: whitesmoke;
+        display: flex;
+        flex-direction: column;
     }
 </style>
