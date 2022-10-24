@@ -4,6 +4,7 @@
         v-for="block in page"
         :key="block.name"
         :is="block.name"
+        v-bind="block.props"
       />
    </main> 
 </template>

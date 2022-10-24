@@ -8,6 +8,9 @@ module.exports = {
     'eslint:recommended',
     '@vue/eslint-config-typescript'
   ],
+  rules: {
+    'vue/no-setup-props-destructure': false
+  },
   parserOptions: {
     ecmaVersion: 'latest'
   }
