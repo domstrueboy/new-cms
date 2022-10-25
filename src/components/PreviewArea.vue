@@ -10,31 +10,31 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, type AsyncComponentLoader } from 'vue'
-import { usePageStore } from '@/stores/page'
-
-// Dynamic import all the blocks from lib
-const folders = import.meta.glob('../lib/blocks/*/*.vue')
-const components = Object.entries(folders)
-  .reduce((blocks: object, [blockName, blockImport]: [string, AsyncComponentLoader]) => ({
-    ...blocks,
-    [blockName.split('/')[3]]: defineAsyncComponent(blockImport)
-  }), {})
+import { components, usePageStore } from '@/stores/page'
 
 export default {
   components,
 
   setup() {
-    const { page } = usePageStore()
+    const { page, setPropsConfig } = usePageStore()
     return { page }
   },
 }
 </script>
 
 <style scoped>
-    main {
-        background-color: whitesmoke;
-        display: flex;
-        flex-direction: column;
-    }
+  main {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  main > section {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px lightgray;
+  }
 </style>
