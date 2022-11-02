@@ -18,7 +18,7 @@ console.log(components);
 interface IBlock {
   name: string,
   props: IPrettyBlockProps | IUglyBlockProps,
-  propsConfig?: Record<string, unknown>,
+  propsConfig?: Record<string, Record<string, unknown>> | null,
 }
 
 // class Block implements IBlock {
@@ -32,7 +32,14 @@ const defaultPage: IBlock[] = [
       title: 'Pretty title',
       likes: 5,
     },
-    propsConfig: undefined,
+    propsConfig: {
+      title: {
+        value: 'Pretty default title',
+        values: [],
+        type: String,
+        required: false,
+      }
+    },
   },
   {
     name: BLOCK_NAMES.UglyBlock,
@@ -43,7 +50,7 @@ const defaultPage: IBlock[] = [
       text: 'Lorem ipsum blablabla',
       author: 'Me'
     },
-    propsConfig: undefined,
+    propsConfig: null,
   }
 ]
 
