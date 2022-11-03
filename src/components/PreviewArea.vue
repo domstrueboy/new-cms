@@ -16,7 +16,7 @@ export default {
   components,
 
   setup() {
-    const { page, setPropsConfig } = usePageStore()
+    const { page } = usePageStore()
     return { page }
   },
 }

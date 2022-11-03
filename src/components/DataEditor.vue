@@ -1,7 +1,12 @@
 <template>
     <aside>
         <p v-for="block in page" :key="block.name">
-            {{ typeof block }}
+            <ul>
+                <li v-for="(prop, name) in block.config">
+                    <h3>{{ name }}</h3>
+                    <p>{{ prop }}</p>
+                </li>
+            </ul>
         </p>
     </aside> 
 </template>
@@ -10,7 +15,4 @@
 import { usePageStore } from '@/stores/page'
 
 const { page } = usePageStore()
-for (const block of page) {
-    console.log(block.component);
-}
 </script>

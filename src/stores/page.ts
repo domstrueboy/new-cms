@@ -1,8 +1,10 @@
 import { ref, computed, defineAsyncComponent, type AsyncComponentLoader, type VueElementConstructor } from 'vue'
 import { defineStore } from 'pinia'
 import BLOCK_NAMES from '@/lib/blocks/BLOCK_NAMES'
+import type { TConfig } from '@/lib/blocks/commonTypes'
 import type { IPrettyBlockProps } from '@/lib/blocks/PrettyBlock/PrettyBlock.vue'
-import type { IUglyBlockProps } from '@/lib/blocks/UglyBlock/UglyBlock.vue'
+import { prettyBlockConfig } from '@/lib/blocks/PrettyBlock/PrettyBlock.config'
+// import type { IUglyBlockProps } from '@/lib/blocks/UglyBlock/UglyBlock.vue'
 
 // Dynamic import all the blocks from lib
 const folders = import.meta.glob('../lib/blocks/*/*.vue')
@@ -13,45 +15,33 @@ export const components = Object.entries(folders)
     [blockName.split('/')[3]]: defineAsyncComponent(blockImport)
   }), {})
 
-console.log(components);
-
 interface IBlock {
   name: string,
-  props: IPrettyBlockProps | IUglyBlockProps,
-  propsConfig?: Record<string, Record<string, unknown>> | null,
+  config: TConfig,
+  props: IPrettyBlockProps, // | IUglyBlockProps,
 }
-
-// class Block implements IBlock {
-  
-// }
 
 const defaultPage: IBlock[] = [
   {
     name: BLOCK_NAMES.PrettyBlock,
+    config: prettyBlockConfig,
+
     props: {
-      title: 'Pretty title',
-      likes: 5,
-    },
-    propsConfig: {
-      title: {
-        value: 'Pretty default title',
-        values: [],
-        type: String,
-        required: false,
-      }
+      title: prettyBlockConfig.title.value as string,
+      likes: prettyBlockConfig.likes.value as number,
     },
   },
-  {
-    name: BLOCK_NAMES.UglyBlock,
-    props: {
-      title: {
-        color: 'yellow',
-      },
-      text: 'Lorem ipsum blablabla',
-      author: 'Me'
-    },
-    propsConfig: null,
-  }
+  // {
+  //   name: BLOCK_NAMES.UglyBlock,
+  //   props: {
+  //     title: {
+  //       color: 'yellow',
+  //     },
+  //     text: 'Lorem ipsum blablabla',
+  //     author: 'Me'
+  //   },
+  //   propsConfig: null,
+  // }
 ]
 
 export const usePageStore = defineStore('page', () => {
@@ -59,7 +49,7 @@ export const usePageStore = defineStore('page', () => {
 
   const setPropsConfig = async (name: string, config: Record<string, unknown>) => {
     const el = page.value.find(block => block.name === name)
-    if (el) el.propsConfig = { ...config }
+    if (el) el.config = { ...config }
   }
   // const doubleCount = computed(() => count.value * 2)
   // function increment() {

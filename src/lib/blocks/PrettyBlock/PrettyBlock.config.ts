@@ -1,28 +1,17 @@
-enum EForm {
-    String,
-    Multiline,
-    Number,
-    Color,
-    Boolean,
-}
+import type { TConfig } from '@/lib/blocks/commonTypes';
+import { EInput } from '@/lib/blocks/commonTypes';
 
-interface IProp {
-    value: unknown,
-    options?: unknown[],
-    type?: EForm,
-}
-
-export const config = {
+export const prettyBlockConfig: TConfig = {
     title: {
         value: 'Pretty default title',
         options: null,
-        formType: EForm.String,
-        switched: false,
+        inputType: EInput.String,
+        optional: false,
     },
     likes: {
         value: 5,
-        values: [],
-        type: EForm.Number,
-        required: false,
+        options: [],
+        inputType: EInput.Number,
+        optional: true,
     },
 }
