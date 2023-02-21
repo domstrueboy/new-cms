@@ -1,17 +1,12 @@
-import type { TConfig } from '@/lib/blocks/commonTypes';
-import { EInput } from '@/lib/blocks/commonTypes';
+import type { TBlockFormConfig } from '@/types';
+import { EInputComponent } from '@/types';
 
-export const prettyBlockConfig: TConfig = {
+export const prettyBlockFormConfig: TBlockFormConfig = {
     title: {
-        value: 'Pretty default title',
-        options: null,
-        inputType: EInput.String,
-        optional: false,
+        inputComponent: EInputComponent.String,
     },
     likes: {
-        value: 5,
-        options: [],
-        inputType: EInput.Number,
+        inputComponent: EInputComponent.Number,
         optional: true,
     },
 }
