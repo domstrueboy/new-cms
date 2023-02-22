@@ -3,10 +3,10 @@ import { EInputComponent } from '@/types';
 
 export const prettyBlockFormConfig: TBlockFormConfig = {
     title: {
-        inputComponent: EInputComponent.String,
+        inputComponentName: EInputComponent.String,
     },
     likes: {
-        inputComponent: EInputComponent.Number,
+        inputComponentName: EInputComponent.Number,
         optional: true,
     },
 }

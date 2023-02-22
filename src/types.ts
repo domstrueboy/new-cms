@@ -9,19 +9,19 @@ export enum EInputComponent {
 }
 
 interface IPropInputConfig {
-    inputComponent?: EInputComponent,
+    inputComponentName?: EInputComponent,
     options?: unknown[],
     optional?: Boolean,
 }
 
 export type TBlockFormConfig = Record<string, IPropInputConfig>;
 
-type TBlockNames = 'PrettyBlock' | 'UglyBlock';
-type TBlockProps = IPrettyBlockProps | IUglyBlockProps;
+export type TBlockName = 'PrettyBlock' | 'UglyBlock';
+export type TBlockProps = IPrettyBlockProps | IUglyBlockProps;
 
 export interface IBlock {
-  name: TBlockNames,
+  name: TBlockName,
   props: TBlockProps,
 }
 
-export type TAllFormsConfig = Record<TBlockNames, TBlockFormConfig>;
+export type TAllFormsConfig = Record<TBlockName, TBlockFormConfig>;

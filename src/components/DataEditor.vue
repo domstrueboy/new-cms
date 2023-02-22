@@ -1,37 +1,34 @@
 <template>
     <aside>
-        <h1>FORM CONFIGS:</h1>
-        <p>{{ JSON.stringify(formsConfig) }}</p>
-        <h1>FORMS:</h1>
-        <ol v-for="block in page" :key="block.name">
-            <li>
+        <ol>
+            <li v-for="block in page" :key="block.name">
                 <h3>{{ block.name }}</h3>
                 <ul>
-                    <li v-for="prop in block.props">
-                        {{ JSON.stringify(prop) }}
-                        <!-- <h3>NAME {{ propName }}</h3>
-                        <p>VALUE {{ propValue }}</p> -->
-                        
-                        <!-- <component
-                            v-for="block in page"
-                            :key="block.name"
-                            :is="block.name"
-                            v-bind="block.props"
-                        /> -->
+                    <li v-for="(propValue, propName) in block.props">
+                        <component
+                            :is="getInputBlock(block.name, propName)"
+                            :key="block.name + propName"
+                            :title="propName"
+                            :value="propValue"
+                        />
                     </li>
                 </ul>
             </li>
         </ol>
-            
-            <!-- <p>{{ JSON.stringify(block) }}</p> -->
-            
-        
     </aside> 
 </template>
 
 <script setup lang="ts">
 import { usePageStore } from '@/stores/page'
-import formsConfig from '@/forms'
+import formsConfig from '@/lib/blocks/formsConfig'
+import type { TBlockName } from '@/types'
+import { EInputComponent } from '@/types'
+import * as Forms from './forms';
+
+const getInputBlock = (blockName: TBlockName, propName: string) => {
+    const key = formsConfig[blockName][propName]?.inputComponentName || EInputComponent.String;
+    return Forms[key] || Forms.StringInput
+}
 
 const { page } = usePageStore()
 </script>

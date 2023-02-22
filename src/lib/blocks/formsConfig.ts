@@ -1,9 +1,9 @@
 import type { TAllFormsConfig } from '@/types'
-import { prettyBlockFormConfig } from './configs/PrettyBlockFormConfig'
+import { prettyBlockFormConfig } from '@/lib/blocks/PrettyBlock/PrettyBlockFormConfig'
 
-const allFormsConfig: TAllFormsConfig = {
+const formsConfig: TAllFormsConfig = {
     PrettyBlock: prettyBlockFormConfig,
     UglyBlock: prettyBlockFormConfig, // @todo: replace it to uglyBlockFormConfig when it's ready
 }
 
-export default allFormsConfig;
+export default formsConfig;
