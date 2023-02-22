@@ -21,6 +21,7 @@ type TBlockProps = IPrettyBlockProps | IUglyBlockProps;
 
 export interface IBlock {
   name: TBlockNames,
-  // formConfig: TBlockFormConfig,
-  props: IPrettyBlockProps | IUglyBlockProps,
+  props: TBlockProps,
 }
+
+export type TAllFormsConfig = Record<TBlockNames, TBlockFormConfig>;

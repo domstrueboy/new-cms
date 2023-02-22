@@ -1,6 +1,5 @@
 import { ref, computed, defineAsyncComponent, type AsyncComponentLoader, type VueElementConstructor } from 'vue'
 import { defineStore } from 'pinia'
-import { prettyBlockFormConfig } from '@/lib/blocks/PrettyBlock/PrettyBlock.config'
 
 import samplePage from '@/server/samplePage'
 
