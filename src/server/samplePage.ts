@@ -5,7 +5,7 @@ const page: IBlock[] = [
         name: 'PrettyBlock',
         props: {
             title: 'Block 1 title',
-            // likes: 100500,
+            likes: 100500,
         }
     },
     // {

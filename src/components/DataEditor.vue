@@ -9,7 +9,7 @@
                             :is="getInputBlock(block.name, propName)"
                             :key="block.name + propName"
                             :title="propName"
-                            :value="propValue"
+                            v-model="propValue"
                         />
                     </li>
                 </ul>
@@ -24,10 +24,11 @@ import formsConfig from '@/lib/blocks/formsConfig'
 import type { TBlockName } from '@/types'
 import { EInputComponent } from '@/types'
 import * as Forms from './forms';
+import NoSuitableInput from './forms/NoSuitableInput.vue';
 
 const getInputBlock = (blockName: TBlockName, propName: string) => {
-    const key = formsConfig[blockName][propName]?.inputComponentName || EInputComponent.String;
-    return Forms[key] || Forms.StringInput
+    const { inputComponentName = EInputComponent.String } = formsConfig[blockName][propName]
+    return Forms[inputComponentName] || NoSuitableInput
 }
 
 const { page } = usePageStore()
