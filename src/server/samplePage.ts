@@ -2,14 +2,16 @@ import type { IBlock } from '../types'
 
 const page: IBlock[] = [
     {
-        name: 'PrettyBlock',
+        id: 'id1',
+        blockName: 'PrettyBlock',
         props: {
             title: 'Block 1 title',
             likes: 100500,
         }
     },
     // {
-    //     name: 'UglyBlock',
+    //     id: 'id2',
+    //     blockName: 'UglyBlock',
     //     props: {
     //         title: {
     //             color: 'yellow',

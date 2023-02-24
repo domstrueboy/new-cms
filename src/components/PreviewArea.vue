@@ -2,8 +2,8 @@
    <main>
       <component
         v-for="block in page"
-        :key="block.name"
-        :is="block.name"
+        :key="block.blockName"
+        :is="block.blockName"
         v-bind="block.props"
       />
    </main> 

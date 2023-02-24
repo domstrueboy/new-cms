@@ -18,9 +18,12 @@ export type TBlockFormConfig = Record<string, IPropInputConfig>;
 
 export type TBlockName = 'PrettyBlock' | 'UglyBlock';
 export type TBlockProps = IPrettyBlockProps | IUglyBlockProps;
+export type TBlockPropsKey = keyof TBlockProps;
+export type TBlockPropsValue = TBlockProps[TBlockPropsKey];
 
 export interface IBlock {
-  name: TBlockName,
+  id: string,
+  blockName: TBlockName,
   props: TBlockProps,
 }
 

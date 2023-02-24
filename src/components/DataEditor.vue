@@ -1,15 +1,16 @@
 <template>
     <aside>
         <ol>
-            <li v-for="block in page" :key="block.name">
-                <h3>{{ block.name }}</h3>
+            <li v-for="block in page" :key="block.blockName">
+                <h3>{{ block.blockName }}</h3>
                 <ul>
                     <li v-for="(propValue, propName) in block.props">
                         <component
-                            :is="getInputBlock(block.name, propName)"
-                            :key="block.name + propName"
+                            :is="getInputBlock(block.blockName, propName)"
+                            :key="block.id"
                             :title="propName"
-                            v-model="propValue"
+                            :modelValue="propValue"
+                            @update:modelValue="setBlockProp(block.id, propName, $event)"
                         />
                     </li>
                 </ul>
@@ -31,5 +32,5 @@ const getInputBlock = (blockName: TBlockName, propName: string) => {
     return Forms[inputComponentName] || NoSuitableInput
 }
 
-const { page } = usePageStore()
+const { page, setBlockProp } = usePageStore()
 </script>
