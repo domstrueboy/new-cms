@@ -1,7 +1,6 @@
 import { ref, computed, defineAsyncComponent, type AsyncComponentLoader, type VueElementConstructor } from 'vue'
 import { defineStore } from 'pinia'
 import type { IBlock, TBlockPropsKey, TBlockPropsValue } from '@/types'
-
 import samplePage from '@/server/samplePage'
 
 // import all the blocks dinamically from /lib
@@ -23,14 +22,19 @@ export const usePageStore = defineStore('page', () => {
     block.props[propName] = value;
   }
 
-  // const doubleCount = computed(() => count.value * 2)
-  // function increment() {
-  //   count.value++
-  // }
+  // const pageWithInputs = computed(() => {
+  //   return page.map(block => {
+  //     return {
+  //       ...block,
+
+  //     }
+  //     !!formsConfig[blockName][propName].inputComponentName
+  //   });
+  // })
 
   return {
     page,
+    // pageWithInputs,
     setBlockProp,
-    // doubleCount,
   }
 })

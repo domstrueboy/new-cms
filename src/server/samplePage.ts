@@ -19,7 +19,15 @@ const page: IBlock[] = [
     //         text: 'Lorem ipsum blablabla',
     //         author: 'Me',
     //     },
-    // }
+    // },
+    {
+        id: 'id3',
+        blockName: 'PrettyBlock',
+        props: {
+            title: 'Block 3 title',
+            likes: 0,
+        }
+    },
 ]
 
 export default page;

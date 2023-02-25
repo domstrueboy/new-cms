@@ -1,16 +1,16 @@
 <template>
     <aside>
         <ol>
-            <li v-for="block in page" :key="block.blockName">
-                <h3>{{ block.blockName }}</h3>
+            <li v-for="{ id, blockName, props } in page" :key="id">
+                <h3>{{ blockName }}</h3>
                 <ul>
-                    <li v-for="(propValue, propName) in block.props">
+                    <li v-for="(propValue, propName) in getPropsWithInputs(blockName, props)">
                         <component
-                            :is="getInputBlock(block.blockName, propName)"
-                            :key="block.id"
+                            :is="getInputBlock(blockName, propName)"
+                            :key="id + propName"
                             :title="propName"
                             :modelValue="propValue"
-                            @update:modelValue="setBlockProp(block.id, propName, $event)"
+                            @update:modelValue="setBlockProp(id, propName, $event)"
                         />
                     </li>
                 </ul>
@@ -22,13 +22,26 @@
 <script setup lang="ts">
 import { usePageStore } from '@/stores/page'
 import formsConfig from '@/lib/blocks/formsConfig'
-import type { TBlockName } from '@/types'
-import { EInputComponent } from '@/types'
+import type { TBlockName, TBlockProps } from '@/types'
 import * as Forms from './forms';
 import NoSuitableInput from './forms/NoSuitableInput.vue';
 
+const getPropsWithInputs = (blockName: TBlockName, props: TBlockProps) => {
+    const propsWithInputs = Object.keys(props).filter(propName => !!formsConfig[blockName][propName].inputComponentName)
+    return Object.entries(props).reduce((acc, [propName, propValue]) => {
+        if (propsWithInputs.includes(propName)) {
+            return {
+                ...acc,
+                [propName]: propValue 
+            }
+        }
+        return acc
+    }, {})
+}
+
 const getInputBlock = (blockName: TBlockName, propName: string) => {
-    const { inputComponentName = EInputComponent.String } = formsConfig[blockName][propName]
+    const { inputComponentName } = formsConfig[blockName][propName]
+    if (inputComponentName === undefined) return null;
     return Forms[inputComponentName] || NoSuitableInput
 }
 
